@@ -31,6 +31,16 @@ createHUD() {
       fontFamily: 'Georgia',
       fontStyle: 'bold'
     }).setOrigin(0.5, 0.5);
+
+    // 가방 버튼
+    const bagBtn = this.add.text(440, 25, '🎒', {
+      fontSize: '22px', fontFamily: 'Arial'
+    }).setOrigin(0.5, 0.5).setInteractive();
+
+    bagBtn.on('pointerdown', () => {
+      const inventory = gameScene.saveData.inventory;
+      this.showInventory(inventory);
+    });
   }
 
  createActionButton() {
@@ -315,6 +325,54 @@ showRareDiscovery(flowerId) {
       });
 
       this.seedPanel.add([item, name, count]);
+    });
+  }
+  showInventory(inventory) {
+    if (this.inventoryPanel) this.inventoryPanel.destroy();
+
+    this.inventoryPanel = this.add.container(240, 400);
+    const bg = this.add.rectangle(0, 0, 420, 500, 0x1a1a2e, 0.97).setOrigin(0.5, 0.5);
+    const title = this.add.text(0, -220, '🎒 인벤토리', {
+      fontSize: '18px', color: '#ffffff', fontFamily: 'Arial'
+    }).setOrigin(0.5, 0.5);
+
+    const closeBtn = this.add.text(190, -220, '✕', {
+      fontSize: '20px', color: '#ffffff', fontFamily: 'Arial'
+    }).setOrigin(0.5, 0.5).setInteractive();
+    closeBtn.on('pointerdown', () => this.inventoryPanel.destroy());
+
+    this.inventoryPanel.add([bg, title, closeBtn]);
+
+    const flowers = Object.keys(inventory).filter(id => inventory[id] > 0);
+
+    if (flowers.length === 0) {
+      const empty = this.add.text(0, 0, '꽃이 없어요!', {
+        fontSize: '16px', color: '#aaaaaa', fontFamily: 'Arial'
+      }).setOrigin(0.5, 0.5);
+      this.inventoryPanel.add(empty);
+      return;
+    }
+
+    flowers.forEach((id, i) => {
+      const flower = FlowerData.getFlower(id);
+      if (!flower) return;
+      const x = (i % 4) * 90 - 135;
+      const y = Math.floor(i / 4) * 90 - 130;
+
+      const item = this.add.text(x, y, flower.emoji, {
+        fontSize: '28px', fontFamily: 'Arial',
+        backgroundColor: '#2d5a27', padding: { x: 8, y: 8 }
+      }).setOrigin(0.5, 0.5);
+
+      const name = this.add.text(x, y + 35, flower.name, {
+        fontSize: '9px', color: '#ffffff', fontFamily: 'Arial'
+      }).setOrigin(0.5, 0.5);
+
+      const count = this.add.text(x + 22, y - 18, `x${inventory[id]}`, {
+        fontSize: '10px', color: '#ffd700', fontFamily: 'Arial'
+      }).setOrigin(0.5, 0.5);
+
+      this.inventoryPanel.add([item, name, count]);
     });
   }
 }
