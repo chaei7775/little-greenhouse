@@ -27,6 +27,7 @@ class GameScene extends Phaser.Scene {
     this.load.image('player', 'images/player.png');
     this.load.image('bg', 'images/bg.png');
     this.load.image('breeding_table', 'images/breeding_table.png');
+    this.load.image('flower_shop', 'images/flower_shop.png');
   }
 
   async create() {
@@ -51,9 +52,35 @@ class GameScene extends Phaser.Scene {
   // 닉네임 없으면 팝업 띄우기
 if (!this.saveData.nickname) {
   this.showNicknamePopup();
+
+
+  
 }
   }
+showFlowerShopOpening() {
+    const overlay = document.getElementById('popup-overlay');
+    const title = document.getElementById('popup-title');
+    const desc = document.getElementById('popup-desc');
+    const input = document.getElementById('popup-input');
+    const btn = document.getElementById('popup-btn');
+    const emoji = document.querySelector('.popup-emoji');
+    const img = document.getElementById('popup-img');
 
+    emoji.style.display = 'none';
+    img.src = 'images/flower_shop.png';
+    img.style.display = 'block';
+    title.textContent = '🌸 꽃집이 열렸어요!';
+    desc.textContent = '도감을 모두 채웠어요! 이제 꽃집을 운영할 수 있어요!';
+    input.style.display = 'none';
+    overlay.classList.add('show');
+
+    btn.onclick = () => {
+      overlay.classList.remove('show');
+      input.style.display = 'block';
+      emoji.style.display = 'block';
+      img.style.display = 'none';
+    };
+  }
  createMap() {
     // 배경 이미지
     this.add.image(240, 425, 'bg').setDisplaySize(480, 800);
@@ -237,6 +264,11 @@ showNicknamePopup() {
       } else {
         this.showMessage(`${flower.emoji} ${flower.name} 수확! +${expGain}exp`);
       }
+// 도감 완성 체크
+      if (this.saveData.discovered.length >= 12 && !this.saveData.shopUnlocked) {
+        this.saveData.shopUnlocked = true;
+        this.showFlowerShopOpening();
+     }
 
       SaveSystem.save(this.saveData);
 
