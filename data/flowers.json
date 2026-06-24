@@ -1,14 +1,14 @@
 [
-  { "id": "red_rose",    "name": "빨강장미",   "emoji": "🌹", "rarity": "basic", "growTime": 30,  "price": 100, "bouquetValue": 150 },
-  { "id": "white_rose",  "name": "흰장미",     "emoji": "🤍", "rarity": "basic", "growTime": 30,  "price": 100, "bouquetValue": 150 },
-  { "id": "tulip",       "name": "튤립",       "emoji": "🌷", "rarity": "basic", "growTime": 30,  "price": 80,  "bouquetValue": 120 },
-  { "id": "daisy",       "name": "데이지",     "emoji": "🌼", "rarity": "basic", "growTime": 30,  "price": 60,  "bouquetValue": 100 },
-  { "id": "pink_rose",   "name": "분홍장미",   "emoji": "🌸", "rarity": "uncommon", "growTime": 60, "price": 200, "bouquetValue": 300 },
-  { "id": "yellow_tulip","name": "노랑튤립",   "emoji": "🌻", "rarity": "uncommon", "growTime": 60, "price": 180, "bouquetValue": 250 },
-  { "id": "white_daisy", "name": "흰데이지",   "emoji": "🌾", "rarity": "uncommon", "growTime": 60, "price": 160, "bouquetValue": 220 },
-  { "id": "purple_lavender","name": "보라라벤더","emoji": "💜", "rarity": "uncommon", "growTime": 30, "price": 180, "bouquetValue": 250 },
-  { "id": "blue_tulip",  "name": "파랑튤립",   "emoji": "💙", "rarity": "uncommon", "growTime": 60, "price": 200, "bouquetValue": 280 },
-  { "id": "moonlight_rose","name": "달빛장미",  "emoji": "🌙", "rarity": "rare", "growTime": 120, "price": 1000, "bouquetValue": 1500 },
-  { "id": "starlight_daisy","name": "별빛데이지","emoji": "⭐", "rarity": "rare", "growTime": 120, "price": 1000, "bouquetValue": 1500 },
-  { "id": "rainbow_tulip","name": "무지개튤립", "emoji": "🌈", "rarity": "rare", "growTime": 120, "price": 1200, "bouquetValue": 2000 }
+  { "id": "red_rose",    "name": "빨강장미",   "emoji": "🌹", "rarity": "basic", "growTime": 60,  "price": 100, "bouquetValue": 150 },
+  { "id": "white_rose",  "name": "흰장미",     "emoji": "🤍", "rarity": "basic", "growTime": 60,  "price": 100, "bouquetValue": 150 },
+  { "id": "tulip",       "name": "튤립",       "emoji": "🌷", "rarity": "basic", "growTime": 60,  "price": 80,  "bouquetValue": 120 },
+  { "id": "daisy",       "name": "데이지",     "emoji": "🌼", "rarity": "basic", "growTime": 60,  "price": 60,  "bouquetValue": 100 },
+  { "id": "pink_rose",   "name": "분홍장미",   "emoji": "🌸", "rarity": "uncommon", "growTime": 100, "price": 200, "bouquetValue": 300 },
+  { "id": "yellow_tulip","name": "노랑튤립",   "emoji": "🌻", "rarity": "uncommon", "growTime": 100, "price": 180, "bouquetValue": 250 },
+  { "id": "white_daisy", "name": "흰데이지",   "emoji": "🌾", "rarity": "uncommon", "growTime": 100, "price": 160, "bouquetValue": 220 },
+  { "id": "purple_lavender","name": "보라라벤더","emoji": "💜", "rarity": "uncommon", "growTime": 60, "price": 180, "bouquetValue": 250 },
+  { "id": "blue_tulip",  "name": "파랑튤립",   "emoji": "💙", "rarity": "uncommon", "growTime": 100, "price": 200, "bouquetValue": 280 },
+  { "id": "moonlight_rose","name": "달빛장미",  "emoji": "🌙", "rarity": "rare", "growTime": 150, "price": 1000, "bouquetValue": 1500 },
+  { "id": "starlight_daisy","name": "별빛데이지","emoji": "⭐", "rarity": "rare", "growTime": 150, "price": 1000, "bouquetValue": 1500 },
+  { "id": "rainbow_tulip","name": "무지개튤립", "emoji": "🌈", "rarity": "rare", "growTime": 150, "price": 1200, "bouquetValue": 2000 }
 ]
