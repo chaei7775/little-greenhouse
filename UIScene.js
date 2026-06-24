@@ -327,7 +327,7 @@ showRareDiscovery(flowerId) {
       this.seedPanel.add([item, name, count]);
     });
   }
-  showInventory(inventory) {
+ showInventory(inventory) {
     if (this.inventoryPanel) this.inventoryPanel.destroy();
 
     this.inventoryPanel = this.add.container(240, 400);
@@ -359,10 +359,8 @@ showRareDiscovery(flowerId) {
       const x = (i % 4) * 90 - 135;
       const y = Math.floor(i / 4) * 90 - 130;
 
-      const item = this.add.text(x, y, flower.emoji, {
-        fontSize: '28px', fontFamily: 'Arial',
-        backgroundColor: '#2d5a27', padding: { x: 8, y: 8 }
-      }).setOrigin(0.5, 0.5);
+      // 이모지 대신 이미지 사용
+      const item = this.add.image(x, y, id).setDisplaySize(50, 50);
 
       const name = this.add.text(x, y + 35, flower.name, {
         fontSize: '9px', color: '#ffffff', fontFamily: 'Arial'
