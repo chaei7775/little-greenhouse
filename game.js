@@ -200,34 +200,45 @@ showNicknamePopup() {
 
     } else if (SaveSystem.isGrown(potData)) {
       // 수확
+      // 수확
       SaveSystem.addToInventory(this.saveData, potData.flower);
       SaveSystem.addToInventory(this.saveData, potData.flower);
+      
+      // 경험치 추가
+      const harvestedFlower = FlowerData.getFlower(potData.flower);
+      const expGain = harvestedFlower.rarity === 'rare' ? 50 : harvestedFlower.rarity === 'uncommon' ? 20 : 10;
+      this.saveData.exp = (this.saveData.exp || 0) + expGain;
+      
+      // 레벨업 체크
+      const newLevel = Math.floor(this.saveData.exp / 100) + 1;
+      if (newLevel > (this.saveData.level || 1)) {
+        this.saveData.level = newLevel;
+      }
+      this.saveData.level = this.saveData.level || 1;
+
+      // 물 드롭
       const droppedFlower = FlowerData.getFlower(potData.flower);
-const dropRoll = Math.random() * 100;
-if (droppedFlower.rarity === 'rare') {
-  if (dropRoll < 30) {
-    this.saveData.waterInventory.starlight_drop++;
-    this.showMessage('⭐ 별빛 물방울을 얻었어요!');
-  }
-} else if (droppedFlower.rarity === 'uncommon') {
-  if (dropRoll < 20) {
-    this.saveData.waterInventory.moonlight_dew++;
-    this.showMessage('🌙 달빛 이슬을 얻었어요!');
-  }
-} else {
-  if (dropRoll < 10) {
-    this.saveData.waterInventory.clear_water++;
-    this.showMessage('💧 맑은 물을 얻었어요!');
-  }
-}
+      const dropRoll = Math.random() * 100;
+      if (droppedFlower.rarity === 'rare') {
+        if (dropRoll < 30) this.saveData.waterInventory.starlight_drop++;
+      } else if (droppedFlower.rarity === 'uncommon') {
+        if (dropRoll < 20) this.saveData.waterInventory.moonlight_dew++;
+      } else {
+        if (dropRoll < 10) this.saveData.waterInventory.clear_water++;
+      }
+
       const isNew = SaveSystem.discover(this.saveData, potData.flower);
       const flower = FlowerData.getFlower(potData.flower);
 
       if (isNew && flower.rarity === 'rare') {
         this.scene.get('UIScene').showRareDiscovery(potData.flower);
+      } else if (newLevel > (this.saveData.level || 1)) {
+        this.showMessage(`🎉 레벨 ${newLevel} 달성! +${expGain}exp`);
       } else {
-        this.showMessage(`${flower.emoji} ${flower.name} 수확!`);
+        this.showMessage(`${flower.emoji} ${flower.name} 수확! +${expGain}exp`);
       }
+
+      SaveSystem.save(this.saveData);
 
       potData.flower = null;
       potData.plantedAt = null;

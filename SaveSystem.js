@@ -1,9 +1,8 @@
 const SaveSystem = {
   SAVE_KEY: 'greenhouse_save',
 
-  defaultSave() {
+ defaultSave() {
     return {
-    
       pots: [
         { id: 0, flower: null, plantedAt: null, wateredAt: null, waterBonus: null },
         { id: 1, flower: null, plantedAt: null, wateredAt: null, waterBonus: null },
@@ -15,9 +14,11 @@ const SaveSystem = {
       inventory: {},
       discovered: [],
       breedingSlots: [null, null],
-      // 나중에 꽃집 추가될 때 쓸 필드
       waterInventory: { clear_water: 5, moonlight_dew: 2, starlight_drop: 1 },
       dailyWater: null,
+      nickname: null,
+      level: 1,
+      exp: 0,
       money: 0,
       reputation: 0,
       shop: null,

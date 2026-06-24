@@ -16,8 +16,17 @@ createHUD() {
     this.add.rectangle(240, 25, 480, 50, 0xf5e6c8, 1).setOrigin(0.5, 0.5);
     const gameScene = this.scene.get('GameScene');
     const nickname = gameScene.saveData?.nickname || '작은 온실';
+    const level = gameScene.saveData?.level || 1;
+    
+    this.add.text(50, 25, `Lv ${level}`, {
+      fontSize: '14px',
+      color: '#5c3d1e',
+      fontFamily: 'Arial',
+      fontStyle: 'bold'
+    }).setOrigin(0.5, 0.5);
+
     this.add.text(240, 25, `🌿 ${nickname}님의 온실`, {
-      fontSize: '18px',
+      fontSize: '16px',
       color: '#5c3d1e',
       fontFamily: 'Georgia',
       fontStyle: 'bold'
