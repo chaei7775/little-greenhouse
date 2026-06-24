@@ -22,14 +22,12 @@ createHUD() {
     }).setOrigin(0.5, 0.5);
   }
 
-  createActionButton() {
-    // 상호작용 버튼 (화분 근처에서 뜸)
+ createActionButton() {
     this.actionBtn = this.add.text(240, 750, '', {
       fontSize: '16px',
-      color: '#ffffff',
-      backgroundColor: '#2d5a27',
-      padding: { x: 20, y: 10 },
-      fontFamily: 'Arial'
+      color: '#5c3d1e',
+      fontFamily: 'Georgia',
+      fontStyle: 'bold'
     }).setOrigin(0.5, 0.5).setInteractive().setVisible(false);
 
     this.actionBtn.on('pointerdown', () => {
@@ -37,14 +35,12 @@ createHUD() {
     });
   }
 
-  // 상호작용 버튼 표시
   showAction(text) {
     if (!this.actionBtn) return;
     this.actionBtn.setText(text);
     this.actionBtn.setVisible(true);
   }
 
-  // 상호작용 버튼 숨기기
   hideAction() {
     if (!this.actionBtn) return;
     this.actionBtn.setVisible(false);

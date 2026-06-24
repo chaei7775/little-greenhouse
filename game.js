@@ -57,6 +57,7 @@ class GameScene extends Phaser.Scene {
 
  createPlayer() {
     this.player = this.add.image(240, 600, 'player').setDisplaySize(100, 140);
+    this.player.setDepth(10);
     this.targetX = 240;
     this.targetY = 600;
   }
@@ -96,12 +97,22 @@ class GameScene extends Phaser.Scene {
     this.breedingTable.type = 'breeding';
   }
 
-  createDexButton() {
-    const btn = this.add.text(430, 750, '📖', {
+ createDexButton() {
+    // 도감 버튼
+    const dexBtn = this.add.text(430, 750, '📖', {
       fontSize: '30px', fontFamily: 'Arial'
     }).setOrigin(0.5, 0.5).setInteractive();
-    btn.on('pointerdown', () => {
+    dexBtn.on('pointerdown', () => {
       this.scene.get('UIScene').showDex(this.saveData.discovered);
+    });
+
+    // 상점 버튼
+    const shopBtn = this.add.text(240, 780, '🛒', {
+      fontSize: '30px', fontFamily: 'Arial'
+    }).setOrigin(0.5, 0.5).setInteractive();
+    shopBtn.on('pointerdown', () => {
+      this.scene.pause('GameScene');
+      this.scene.launch('ShopScene');
     });
   }
 
@@ -369,7 +380,7 @@ const config = {
   width: 480,
   height: 800,
   transparent: true,
-  scene: [GameScene, UIScene],
+  scene: [GameScene, UIScene, ShopScene],
   parent: document.body,
   scale: {
     mode: Phaser.Scale.FIT,
