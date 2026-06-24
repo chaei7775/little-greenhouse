@@ -14,8 +14,10 @@ class UIScene extends Phaser.Scene {
 
 createHUD() {
     this.add.rectangle(240, 25, 480, 50, 0xf5e6c8, 1).setOrigin(0.5, 0.5);
-    this.add.text(240, 25, '🌿 작은 온실', {
-      fontSize: '20px',
+    const gameScene = this.scene.get('GameScene');
+    const nickname = gameScene.saveData?.nickname || '작은 온실';
+    this.add.text(240, 25, `🌿 ${nickname}님의 온실`, {
+      fontSize: '18px',
       color: '#5c3d1e',
       fontFamily: 'Georgia',
       fontStyle: 'bold'
@@ -86,31 +88,27 @@ createHUD() {
   }
 
   // 희귀 꽃 발견 연출
- showRareDiscovery(flowerId) {
+showRareDiscovery(flowerId) {
     const flower = FlowerData.getFlower(flowerId);
     if (!flower) return;
 
     const panel = this.add.container(240, 400);
-    const bg = this.add.rectangle(0, 0, 350, 250, 0x1a1a2e, 0.97).setOrigin(0.5, 0.5);
-    const star = this.add.text(0, -70, '✨', { fontSize: '40px' }).setOrigin(0.5, 0.5);
-    const emoji = this.add.text(0, -10, flower.emoji, { fontSize: '50px' }).setOrigin(0.5, 0.5);
-    const name = this.add.text(0, 50, `${flower.name} 발견!`, {
+    const bg = this.add.rectangle(0, 0, 350, 280, 0x1a1a2e, 0.97).setOrigin(0.5, 0.5);
+    const star = this.add.text(0, -90, '✨', { fontSize: '40px' }).setOrigin(0.5, 0.5);
+    const emoji = this.add.text(0, -30, flower.emoji, { fontSize: '50px' }).setOrigin(0.5, 0.5);
+    const name = this.add.text(0, 40, `${flower.name} 발견!`, {
       fontSize: '22px', color: '#ffd700', fontFamily: 'Arial'
     }).setOrigin(0.5, 0.5);
-    const sub = this.add.text(0, 90, '도감에 등록되었습니다!', {
+    const sub = this.add.text(0, 80, '도감에 등록되었습니다!', {
       fontSize: '14px', color: '#ffffff', fontFamily: 'Arial'
     }).setOrigin(0.5, 0.5);
-    const closeBtn = this.add.text(0, 130, '[ 확인 ]', {
+    const closeBtn = this.add.text(0, 120, '[ 확인 ]', {
       fontSize: '18px', color: '#7fff7f', fontFamily: 'Arial',
       backgroundColor: '#2d5a27', padding: { x: 20, y: 10 }
     }).setOrigin(0.5, 0.5).setInteractive();
 
     closeBtn.on('pointerdown', () => panel.destroy());
-    panel.add([bg, star, emoji, name, sub]);
-    
-    // closeBtn은 패널 밖에서 따로 추가
-    this.add.existing(closeBtn);
-    closeBtn.setPosition(240, 530);
+    panel.add([bg, star, emoji, name, sub, closeBtn]);
   }
   // 교배 선택 팝업
   showBreedingPanel(inventory, onBreed) {

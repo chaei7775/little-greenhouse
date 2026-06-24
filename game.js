@@ -48,6 +48,10 @@ class GameScene extends Phaser.Scene {
       this.targetX = ptr.x;
       this.targetY = ptr.y;
     });
+  // 닉네임 없으면 팝업 띄우기
+if (!this.saveData.nickname) {
+  this.showNicknamePopup();
+}
   }
 
  createMap() {
@@ -115,7 +119,21 @@ class GameScene extends Phaser.Scene {
       this.scene.launch('ShopScene');
     });
   }
-
+showNicknamePopup() {
+    const overlay = document.getElementById('popup-overlay');
+    const btn = document.getElementById('popup-btn');
+    const input = document.getElementById('popup-input');
+    
+    overlay.classList.add('show');
+    
+    btn.onclick = () => {
+      const nickname = input.value.trim();
+      if (!nickname) return;
+      this.saveData.nickname = nickname;
+      SaveSystem.save(this.saveData);
+      overlay.classList.remove('show');
+    };
+  }
  updatePotDisplay() {
     this.pots.forEach((pot, i) => {
       const potData = this.saveData.pots[i];
