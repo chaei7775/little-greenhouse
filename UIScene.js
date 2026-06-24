@@ -86,7 +86,7 @@ createHUD() {
   }
 
   // 희귀 꽃 발견 연출
-  showRareDiscovery(flowerId) {
+ showRareDiscovery(flowerId) {
     const flower = FlowerData.getFlower(flowerId);
     if (!flower) return;
 
@@ -101,11 +101,16 @@ createHUD() {
       fontSize: '14px', color: '#ffffff', fontFamily: 'Arial'
     }).setOrigin(0.5, 0.5);
     const closeBtn = this.add.text(0, 130, '[ 확인 ]', {
-      fontSize: '16px', color: '#7fff7f', fontFamily: 'Arial'
+      fontSize: '18px', color: '#7fff7f', fontFamily: 'Arial',
+      backgroundColor: '#2d5a27', padding: { x: 20, y: 10 }
     }).setOrigin(0.5, 0.5).setInteractive();
 
     closeBtn.on('pointerdown', () => panel.destroy());
-    panel.add([bg, star, emoji, name, sub, closeBtn]);
+    panel.add([bg, star, emoji, name, sub]);
+    
+    // closeBtn은 패널 밖에서 따로 추가
+    this.add.existing(closeBtn);
+    closeBtn.setPosition(240, 530);
   }
   // 교배 선택 팝업
   showBreedingPanel(inventory, onBreed) {
