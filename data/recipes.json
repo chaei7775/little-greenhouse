@@ -3,24 +3,24 @@
     "a": "red_rose",
     "b": "white_rose",
     "results": [
-      { "flower": "pink_rose", "chance": 90 },
-      { "flower": "moonlight_rose", "chance": 5 }
+      { "flower": "pink_rose", "chance": 55 },
+      { "flower": "moonlight_rose", "chance": 40 }
     ]
   },
   {
     "a": "tulip",
     "b": "daisy",
     "results": [
-      { "flower": "yellow_tulip", "chance": 75 },
-      { "flower": "blue_tulip", "chance": 20 }
+      { "flower": "yellow_tulip", "chance": 55 },
+      { "flower": "blue_tulip", "chance": 40 }
     ]
   },
   {
     "a": "daisy",
     "b": "purple_lavender",
     "results": [
-      { "flower": "white_daisy", "chance": 90 },
-      { "flower": "starlight_daisy", "chance": 5 }
+      { "flower": "white_daisy", "chance": 55 },
+      { "flower": "starlight_daisy", "chance": 40 }
     ]
   },
   {

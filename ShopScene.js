@@ -68,20 +68,47 @@ class ShopScene extends Phaser.Scene {
     });
   }
 
-  createBuySection() {
-    this.add.text(240, 450, '💧 물 구매', {
+ createBuySection() {
+    this.add.text(240, 370, '🌱 씨앗 구매', {
+      fontSize: '16px', color: '#5c3d1e', fontFamily: 'Arial', fontStyle: 'bold'
+    }).setOrigin(0.5, 0.5);
+
+    // 기본꽃 씨앗만 판매
+    const seedIds = ['red_rose', 'white_rose', 'tulip', 'daisy', 'purple_lavender'];
+    seedIds.forEach((id, i) => {
+      const flower = FlowerData.getFlower(id);
+      if (!flower) return;
+      const price = Math.floor(flower.price * 0.5);
+      const x = (i % 4) * 100 + 65;
+      const y = Math.floor(i / 4) * 90 + 430;
+
+      const item = this.add.text(x, y, flower.emoji, {
+        fontSize: '28px', fontFamily: 'Arial',
+        backgroundColor: '#f5e6c8', padding: { x: 8, y: 8 }
+      }).setOrigin(0.5, 0.5).setInteractive();
+
+      this.add.text(x, y + 35, `💰${price}`, {
+        fontSize: '11px', color: '#c8860a', fontFamily: 'Arial'
+      }).setOrigin(0.5, 0.5);
+
+      item.on('pointerdown', () => {
+        this.showQuantityPopup('buy', id, flower, null, price);
+      });
+    });
+
+    this.add.text(240, 560, '💧 물 구매', {
       fontSize: '16px', color: '#5c3d1e', fontFamily: 'Arial', fontStyle: 'bold'
     }).setOrigin(0.5, 0.5);
 
     const waters = FlowerData.waters;
     waters.forEach((water, i) => {
-      const y = i * 90 + 520;
+      const y = i * 70 + 620;
       const count = this.saveData.waterInventory[water.id] || 0;
       const price = water.id === 'clear_water' ? 10 : water.id === 'moonlight_dew' ? 30 : 100;
 
       const btn = this.add.text(240, y, `${water.emoji} ${water.name}  💰${price}  (보유: ${count})`, {
-        fontSize: '15px', color: '#5c3d1e',
-        backgroundColor: '#f5e6c8', padding: { x: 15, y: 10 },
+        fontSize: '14px', color: '#5c3d1e',
+        backgroundColor: '#f5e6c8', padding: { x: 15, y: 8 },
         fontFamily: 'Arial'
       }).setOrigin(0.5, 0.5).setInteractive();
 
