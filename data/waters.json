@@ -1,0 +1,5 @@
+[
+  { "id": "clear_water",    "name": "맑은 물",      "emoji": "💧", "effect": "speed",  "value": 0.5 },
+  { "id": "moonlight_dew",  "name": "달빛 이슬",    "emoji": "🌙", "effect": "rare",   "value": 20  },
+  { "id": "starlight_drop", "name": "별빛 물방울",  "emoji": "⭐", "effect": "rare",   "value": 40  }
+]

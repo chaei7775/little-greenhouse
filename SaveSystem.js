@@ -1,0 +1,71 @@
+const SaveSystem = {
+  SAVE_KEY: 'greenhouse_save',
+
+  defaultSave() {
+    return {
+      pots: [
+        { id: 0, flower: null, plantedAt: null, wateredAt: null, waterBonus: null },
+        { id: 1, flower: null, plantedAt: null, wateredAt: null, waterBonus: null },
+        { id: 2, flower: null, plantedAt: null, wateredAt: null, waterBonus: null },
+        { id: 3, flower: null, plantedAt: null, wateredAt: null, waterBonus: null },
+        { id: 4, flower: null, plantedAt: null, wateredAt: null, waterBonus: null },
+        { id: 5, flower: null, plantedAt: null, wateredAt: null, waterBonus: null },
+      ],
+      inventory: {},
+      discovered: [],
+      breedingSlots: [null, null],
+      // 나중에 꽃집 추가될 때 쓸 필드
+      waterInventory: { clear_water: 5, moonlight_dew: 2, starlight_drop: 1 },
+      dailyWater: null,
+      money: 0,
+      reputation: 0,
+      shop: null,
+    };
+  },
+
+  save(data) {
+    localStorage.setItem(this.SAVE_KEY, JSON.stringify(data));
+    console.log('저장 완료');
+  },
+
+  load() {
+    const saved = localStorage.getItem(this.SAVE_KEY);
+    if (saved) {
+      console.log('세이브 불러오기 완료');
+      return JSON.parse(saved);
+    }
+    console.log('새 게임 시작');
+    return this.defaultSave();
+  },
+
+  // 인벤토리에 꽃 추가
+  addToInventory(data, flowerId) {
+    if (!data.inventory[flowerId]) {
+      data.inventory[flowerId] = 0;
+    }
+    data.inventory[flowerId]++;
+  },
+
+  // 도감 등록
+  discover(data, flowerId) {
+    if (!data.discovered.includes(flowerId)) {
+      data.discovered.push(flowerId);
+      return true; // 새 발견!
+    }
+    return false;
+  },
+
+  // 성장 완료 여부 체크
+ isGrown(pot) {
+    if (!pot.flower || !pot.plantedAt) return false;
+    const flower = FlowerData.getFlower(pot.flower);
+    if (!flower || flower.growTime === 0) return false;
+    const elapsed = (Date.now() - pot.plantedAt) / 1000;
+    let growTime = flower.growTime;
+    // 맑은 물 효과 적용
+    if (pot.waterBonus === 'speed') {
+      growTime = growTime * 0.5;
+    }
+    return elapsed >= growTime;
+  }
+};
