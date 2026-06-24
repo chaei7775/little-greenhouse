@@ -38,13 +38,21 @@ const SaveSystem = {
     const cloudData = await FirebaseSystem.load();
     if (cloudData) {
       console.log('클라우드 세이브 불러오기 완료');
+      // 도감 12개 채웠는데 shopUnlocked 없으면 자동 설정
+      if (cloudData.discovered && cloudData.discovered.length >= 12 && !cloudData.shopUnlocked) {
+        cloudData.shopUnlocked = true;
+      }
       return cloudData;
     }
     // Firebase 없으면 localStorage
     const saved = localStorage.getItem(this.SAVE_KEY);
     if (saved) {
       console.log('로컬 세이브 불러오기 완료');
-      return JSON.parse(saved);
+      const data = JSON.parse(saved);
+      if (data.discovered && data.discovered.length >= 12 && !data.shopUnlocked) {
+        data.shopUnlocked = true;
+      }
+      return data;
     }
     console.log('새 게임 시작');
     return this.defaultSave();
@@ -58,11 +66,14 @@ const SaveSystem = {
     data.inventory[flowerId]++;
   },
 
-  // 도감 등록
   discover(data, flowerId) {
     if (!data.discovered.includes(flowerId)) {
       data.discovered.push(flowerId);
-      return true; // 새 발견!
+      // 도감 완성 체크
+      if (data.discovered.length >= 12 && !data.shopUnlocked) {
+        data.shopUnlocked = true;
+      }
+      return true;
     }
     return false;
   },

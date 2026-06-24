@@ -256,6 +256,11 @@ showNicknamePopup() {
       }
 
       const isNew = SaveSystem.discover(this.saveData, potData.flower);
+      // 도감 완성 체크
+        if (this.saveData.discovered.length >= 12 && !this.saveData.shopUnlocked) {
+        this.saveData.shopUnlocked = true;
+        this.showFlowerShopOpening();
+      }
       const flower = FlowerData.getFlower(potData.flower);
 
       if (isNew && flower.rarity === 'rare') {
@@ -265,11 +270,7 @@ showNicknamePopup() {
       } else {
         this.showMessage(`${flower.emoji} ${flower.name} 수확! +${expGain}exp`);
       }
-// 도감 완성 체크
-      if (this.saveData.discovered.length >= 12 && !this.saveData.shopUnlocked) {
-        this.saveData.shopUnlocked = true;
-        this.showFlowerShopOpening();
-     }
+
 
       SaveSystem.save(this.saveData);
 
@@ -365,10 +366,16 @@ showNicknamePopup() {
     this.time.delayedCall(2000, () => msg.destroy());
   }
 
-  update() {
+ update() {
     this.movePlayer();
     this.checkNearObjects();
     this.updatePotDisplay();
+    
+    // 꽃집 오픈 체크
+    if (this.saveData && this.saveData.shopUnlocked && !this._shopOpeningShown) {
+      this._shopOpeningShown = true;
+      this.showFlowerShopOpening();
+    }
   }
 
   movePlayer() {
