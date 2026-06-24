@@ -3,6 +3,7 @@ const SaveSystem = {
 
   defaultSave() {
     return {
+    
       pots: [
         { id: 0, flower: null, plantedAt: null, wateredAt: null, waterBonus: null },
         { id: 1, flower: null, plantedAt: null, wateredAt: null, waterBonus: null },
@@ -24,14 +25,24 @@ const SaveSystem = {
   },
 
   save(data) {
+    // localStorage에도 저장 (백업)
     localStorage.setItem(this.SAVE_KEY, JSON.stringify(data));
+    // Firebase에도 저장
+    FirebaseSystem.save(data);
     console.log('저장 완료');
   },
 
-  load() {
+  async load() {
+    // Firebase에서 먼저 불러오기
+    const cloudData = await FirebaseSystem.load();
+    if (cloudData) {
+      console.log('클라우드 세이브 불러오기 완료');
+      return cloudData;
+    }
+    // Firebase 없으면 localStorage
     const saved = localStorage.getItem(this.SAVE_KEY);
     if (saved) {
-      console.log('세이브 불러오기 완료');
+      console.log('로컬 세이브 불러오기 완료');
       return JSON.parse(saved);
     }
     console.log('새 게임 시작');

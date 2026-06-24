@@ -31,7 +31,7 @@ class GameScene extends Phaser.Scene {
 
   async create() {
     await FlowerData.load();
-    this.saveData = SaveSystem.load();
+    this.saveData = await SaveSystem.load();
 
     this.createMap();
     this.createPlayer();
