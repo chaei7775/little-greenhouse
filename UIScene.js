@@ -92,11 +92,9 @@ createHUD() {
       const x = (i % 4) * 90 - 135;
       const y = Math.floor(i / 4) * 90 - 150;
 
-      const item = this.add.text(x, y,
-        isDiscovered ? flower.emoji : '❓', {
-        fontSize: '30px', fontFamily: 'Arial'
-      }).setOrigin(0.5, 0.5);
-
+     const item = isDiscovered 
+  ? this.add.image(x, y, flower.id).setDisplaySize(50, 50)
+  : this.add.text(x, y, '❓', { fontSize: '30px', fontFamily: 'Arial' }).setOrigin(0.5, 0.5);
       const label = this.add.text(x, y + 35,
         isDiscovered ? flower.name : '???', {
         fontSize: '10px', color: '#ffffff', fontFamily: 'Arial'
@@ -181,10 +179,11 @@ showRareDiscovery(flowerId) {
       const x = (i % 4) * 90 - 135;
       const y = Math.floor(i / 4) * 90 - 80;
 
-      const item = this.add.text(x, y, flower.emoji, {
-        fontSize: '32px', fontFamily: 'Arial',
-        backgroundColor: '#2d5a27', padding: { x: 8, y: 8 }
-      }).setOrigin(0.5, 0.5).setInteractive();
+     const item = this.add.image(x, y, id).setDisplaySize(50, 50).setInteractive();
+const name = this.add.text(x, y + 35, flower.name, {
+  fontSize: '9px', color: '#ffffff', fontFamily: 'Arial'
+}).setOrigin(0.5, 0.5);
+
 
       const count = this.add.text(x + 20, y + 20, `x${inventory[id]}`, {
         fontSize: '10px', color: '#ffffff', fontFamily: 'Arial'
@@ -203,7 +202,7 @@ showRareDiscovery(flowerId) {
         }
       });
 
-      this.breedPanel.add([item, count]);
+      this.breedPanel.add([item, name, count]);
     });
 
     // 교배 시작 버튼
@@ -306,10 +305,7 @@ showRareDiscovery(flowerId) {
       const x = (i % 4) * 90 - 135;
       const y = Math.floor(i / 4) * 90 - 130;
 
-      const item = this.add.text(x, y, flower.emoji, {
-        fontSize: '32px', fontFamily: 'Arial',
-        backgroundColor: '#2d5a27', padding: { x: 8, y: 8 }
-      }).setOrigin(0.5, 0.5).setInteractive();
+     const item = this.add.image(x, y, id).setDisplaySize(50, 50).setInteractive();
 
       const name = this.add.text(x, y + 38, flower.name, {
         fontSize: '9px', color: '#ffffff', fontFamily: 'Arial'

@@ -49,16 +49,14 @@ class ShopScene extends Phaser.Scene {
       const x = (i % 4) * 100 + 65;
       const y = Math.floor(i / 4) * 90 + 150;
 
-      const item = this.add.text(x, y, flower.emoji, {
-        fontSize: '30px', fontFamily: 'Arial',
-        backgroundColor: '#f5e6c8', padding: { x: 8, y: 8 }
-      }).setOrigin(0.5, 0.5).setInteractive();
+      const item = this.add.image(x, y, flower.id).setDisplaySize(50, 50).setInteractive();
+    
 
       this.add.text(x, y + 35, `x${inventory[id]}`, {
         fontSize: '11px', color: '#5c3d1e', fontFamily: 'Arial'
       }).setOrigin(0.5, 0.5);
 
-      this.add.text(x, y + 50, `💰${flower.price}`, {
+      this.add.text(x, y + 50, `💰${Math.floor(flower.price * 4)}`, {
         fontSize: '11px', color: '#c8860a', fontFamily: 'Arial'
       }).setOrigin(0.5, 0.5);
 
@@ -82,11 +80,7 @@ class ShopScene extends Phaser.Scene {
       const x = (i % 4) * 100 + 65;
       const y = Math.floor(i / 4) * 90 + 430;
 
-      const item = this.add.text(x, y, flower.emoji, {
-        fontSize: '28px', fontFamily: 'Arial',
-        backgroundColor: '#f5e6c8', padding: { x: 8, y: 8 }
-      }).setOrigin(0.5, 0.5).setInteractive();
-
+     const item = this.add.image(x, y, flower.id).setDisplaySize(50, 50).setInteractive();
       this.add.text(x, y + 35, `💰${price}`, {
         fontSize: '11px', color: '#c8860a', fontFamily: 'Arial'
       }).setOrigin(0.5, 0.5);
@@ -128,7 +122,7 @@ class ShopScene extends Phaser.Scene {
       fontSize: '18px', color: '#ffffff', fontFamily: 'Arial'
     }).setOrigin(0.5, 0.5);
 
-    const priceText = this.add.text(0, -45, type === 'sell' ? `개당 💰${item.price}` : `개당 💰${price}`, {
+    const priceText = this.add.text(0, -45, type === 'sell' ? `개당 💰${Math.floor(item.price * 4)}` : `개당 💰${price}`, {
       fontSize: '14px', color: '#ffd700', fontFamily: 'Arial'
     }).setOrigin(0.5, 0.5);
 
@@ -138,7 +132,7 @@ class ShopScene extends Phaser.Scene {
       fontSize: '24px', color: '#ffffff', fontFamily: 'Arial', fontStyle: 'bold'
     }).setOrigin(0.5, 0.5);
 
-    const totalText = this.add.text(0, 35, type === 'sell' ? `총 💰${qty * item.price}` : `총 💰${qty * price}`, {
+    const totalText = this.add.text(0, 35, type === 'sell' ? `총 💰${qty * Math.floor(item.price * 4)}` : `총 💰${qty * price}`, {
       fontSize: '14px', color: '#ffd700', fontFamily: 'Arial'
     }).setOrigin(0.5, 0.5);
 
@@ -156,7 +150,7 @@ class ShopScene extends Phaser.Scene {
       if (qty > 1) {
         qty--;
         qtyText.setText(`${qty}개`);
-        totalText.setText(type === 'sell' ? `총 💰${qty * item.price}` : `총 💰${qty * price}`);
+       totalText.setText(type === 'sell' ? `총 💰${qty * Math.floor(item.price * 4)}` : `총 💰${qty * price}`);
       }
     });
 
@@ -165,7 +159,7 @@ class ShopScene extends Phaser.Scene {
       if (qty < limit) {
         qty++;
         qtyText.setText(`${qty}개`);
-        totalText.setText(type === 'sell' ? `총 💰${qty * item.price}` : `총 💰${qty * price}`);
+        totalText.setText(type === 'sell' ? `총 💰${qty * Math.floor(item.price * 4)}` : `총 💰${qty * price}`);
       }
     });
 
@@ -186,7 +180,7 @@ class ShopScene extends Phaser.Scene {
     confirmBtn.on('pointerdown', () => {
       if (type === 'sell') {
         this.saveData.inventory[id] -= qty;
-        this.saveData.money += qty * item.price;
+        this.saveData.money += qty * Math.floor(item.price * 4);
       } else {
         const total = qty * price;
         if (this.saveData.money >= total) {
