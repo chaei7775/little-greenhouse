@@ -46,9 +46,10 @@ class GameScene extends Phaser.Scene {
 
     // 터치 이동
     this.input.on('pointerdown', (ptr) => {
-      this.targetX = ptr.x;
-      this.targetY = ptr.y;
-    });
+  if (ptr.y > 720) return; // 하단 버튼 영역 터치 무시
+  this.targetX = ptr.x;
+  this.targetY = ptr.y;
+});
   // 닉네임 없으면 팝업 띄우기
 if (!this.saveData.nickname) {
   this.showNicknamePopup();
