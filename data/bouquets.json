@@ -1,0 +1,50 @@
+[
+  {
+    "id": "spring_bouquet",
+    "name": "봄 꽃다발",
+    "flowers": ["red_rose", "tulip", "daisy"],
+    "emoji": "🌷"
+  },
+  {
+    "id": "lavender_bouquet",
+    "name": "라벤더 꽃다발",
+    "flowers": ["purple_lavender", "white_daisy", "white_rose"],
+    "emoji": "💜"
+  },
+  {
+    "id": "sunset_bouquet",
+    "name": "노을 꽃다발",
+    "flowers": ["yellow_tulip", "pink_rose", "daisy"],
+    "emoji": "🌻"
+  },
+  {
+    "id": "moonlight_bouquet",
+    "name": "달빛 꽃다발",
+    "flowers": ["red_rose", "white_rose", "moonlight_rose"],
+    "emoji": "🌙"
+  },
+  {
+    "id": "starlight_bouquet",
+    "name": "별빛 꽃다발",
+    "flowers": ["daisy", "purple_lavender", "starlight_daisy"],
+    "emoji": "⭐"
+  },
+  {
+    "id": "rainbow_bouquet",
+    "name": "무지개 꽃다발",
+    "flowers": ["yellow_tulip", "blue_tulip", "rainbow_tulip"],
+    "emoji": "🌈"
+  },
+  {
+    "id": "mystic_bouquet",
+    "name": "신비 꽃다발",
+    "flowers": ["pink_rose", "moonlight_rose", "starlight_daisy"],
+    "emoji": "✨"
+  },
+  {
+    "id": "legend_bouquet",
+    "name": "전설 꽃다발",
+    "flowers": ["white_rose", "moonlight_rose", "rainbow_tulip"],
+    "emoji": "👑"
+  }
+]

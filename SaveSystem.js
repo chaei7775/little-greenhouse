@@ -21,6 +21,8 @@ const SaveSystem = {
       exp: 0,
       money: 0,
       reputation: 0,
+      displaySlots: [null, null, null, null], // 진열대 4칸
+      bouquetInventory: [], // 만든 꽃다발 목록
       shop: null,
     };
   },

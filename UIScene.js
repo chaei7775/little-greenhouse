@@ -350,6 +350,11 @@ showRareDiscovery(flowerId) {
 
     this.inventoryPanel.add([bg, title, closeBtn]);
 
+    const moneyText = this.add.text(0, -185, `💰 ${this.scene.get('GameScene').saveData.money}`, {
+  fontSize: '14px', color: '#ffd700', fontFamily: 'Arial'
+}).setOrigin(0.5, 0.5);
+this.inventoryPanel.add(moneyText);
+
     const flowers = Object.keys(inventory).filter(id => inventory[id] > 0);
 
     if (flowers.length === 0) {

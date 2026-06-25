@@ -2,18 +2,22 @@ const FlowerData = {
   flowers: [],
   recipes: [],
   waters: [],
+  bouquets: [],
 
-  async load() {
-    const [flowersRes, recipesRes, watersRes] = await Promise.all([
+ async load() {
+    const [flowersRes, recipesRes, watersRes, bouquetsRes] = await Promise.all([
       fetch('data/flowers.json?v=2'),
       fetch('data/recipes.json?v=2'),
-      fetch('data/waters.json?v=2')
+      fetch('data/waters.json?v=2'),
+      fetch('data/bouquets.json?v=2')
     ]);
     this.flowers = await flowersRes.json();
     this.recipes = await recipesRes.json();
     this.waters = await watersRes.json();
+    this.bouquets = await bouquetsRes.json();
     console.log('꽃 데이터 로드 완료:', this.flowers.length, '종');
     console.log('물 데이터 로드 완료:', this.waters.length, '종');
+    console.log('꽃다발 데이터 로드 완료:', this.bouquets.length, '종');
   },
 
   getFlower(id) {
