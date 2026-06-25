@@ -46,6 +46,77 @@
     }
     #popup-box button:hover { background: #b8834f; }
     .popup-emoji { font-size: 40px; margin-bottom: 10px; }
+
+    #inventory-overlay {
+  display: none;
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.6);
+  z-index: 100;
+  justify-content: center;
+  align-items: center;
+}
+#inventory-overlay.show { display: flex; }
+#inventory-box {
+  background: #1a1a2e;
+  border-radius: 20px;
+  padding: 20px;
+  max-width: 360px;
+  width: 90%;
+  max-height: 70vh;
+  overflow-y: auto;
+  position: relative;
+}
+#inventory-box h2 {
+  color: #ffffff;
+  font-size: 18px;
+  font-family: Arial;
+  text-align: center;
+  margin-bottom: 10px;
+}
+#inventory-money {
+  color: #ffd700;
+  font-size: 14px;
+  font-family: Arial;
+  text-align: center;
+  margin-bottom: 15px;
+}
+#inventory-close {
+  position: absolute;
+  top: 15px; right: 15px;
+  color: #ffffff;
+  font-size: 20px;
+  cursor: pointer;
+  font-family: Arial;
+}
+#inventory-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+.inv-item {
+  text-align: center;
+  background: #2d5a27;
+  border-radius: 10px;
+  padding: 8px;
+}
+.inv-item img {
+  width: 50px;
+  height: 50px;
+  object-fit: contain;
+}
+.inv-item .inv-name {
+  color: #ffffff;
+  font-size: 9px;
+  font-family: Arial;
+  margin-top: 3px;
+}
+.inv-item .inv-count {
+  color: #ffd700;
+  font-size: 10px;
+  font-family: Arial;
+}
   </style>
 </head>
 <body>
@@ -71,5 +142,14 @@
   <script src="FlowerShopScene.js"></script>
   <script src="FieldScene.js"></script>
   <script src="game.js"></script>
+
+  <div id="inventory-overlay">
+  <div id="inventory-box">
+    <span id="inventory-close">✕</span>
+    <h2>🎒 인벤토리</h2>
+    <div id="inventory-money"></div>
+    <div id="inventory-grid"></div>
+  </div>
+</div>
 </body>
 </html>

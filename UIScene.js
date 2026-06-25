@@ -38,9 +38,8 @@ createHUD() {
     }).setOrigin(0.5, 0.5).setInteractive();
 
     bagBtn.on('pointerdown', () => {
-      const inventory = gameScene.saveData.inventory;
-      this.showInventory(inventory);
-    });
+  gameScene.showHTMLInventory();
+});
     // 꽃집 버튼 (도감 완성 후에만 보임)
        if (gameScene.saveData?.shopUnlocked) {
      const shopBtn = this.add.text(400, 25, '🌸', {

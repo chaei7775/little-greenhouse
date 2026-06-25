@@ -31,7 +31,6 @@ class GameScene extends Phaser.Scene {
     this.load.image('flowershop_bg', 'images/flowershop_bg.png');
     this.load.image('field_bg', 'images/field_bg.png');
     this.load.image('seed', 'images/seed.png');
-    
 //소리
     this.load.audio('plant', 'sounds/plant.mp3');
     this.load.audio('water', 'sounds/water.wav');
@@ -199,6 +198,35 @@ showNicknamePopup() {
     });
   }
 
+  showHTMLInventory() {
+    const overlay = document.getElementById('inventory-overlay');
+    const grid = document.getElementById('inventory-grid');
+    const money = document.getElementById('inventory-money');
+    const closeBtn = document.getElementById('inventory-close');
+
+    money.textContent = `💰 ${this.saveData.money}`;
+    grid.innerHTML = '';
+
+    const inventory = this.saveData.inventory;
+    const flowers = Object.keys(inventory).filter(id => inventory[id] > 0);
+
+    flowers.forEach(id => {
+      const flower = FlowerData.getFlower(id);
+      if (!flower) return;
+      const item = document.createElement('div');
+      item.className = 'inv-item';
+      item.innerHTML = `
+        <img src="images/${id}.png" alt="${flower.name}">
+        <div class="inv-name">${flower.name}</div>
+        <div class="inv-count">x${inventory[id]}</div>
+      `;
+      grid.appendChild(item);
+    });
+
+    overlay.classList.add('show');
+    closeBtn.onclick = () => overlay.classList.remove('show');
+  }
+
   handleAction() {
     if (!this.nearObject) return;
 
@@ -349,7 +377,7 @@ showNicknamePopup() {
       this.time.delayedCall(3000, () => {
         loadingText.destroy();
 
-        if (!result) {
+       if (!result) {
   const hasRecipe = FlowerData.recipes.find(r =>
     (r.a === flowerA && r.b === flowerB) ||
     (r.a === flowerB && r.b === flowerA)
@@ -359,8 +387,8 @@ showNicknamePopup() {
   } else {
     this.showMessage('❌ 이 조합은 교배가 안 돼요!');
   }
-          return;
-        }
+  return;
+}
 
         inventory[flowerA]--;
         inventory[flowerB]--;
