@@ -29,6 +29,7 @@ class GameScene extends Phaser.Scene {
     this.load.image('breeding_table', 'images/breeding_table.png');
     this.load.image('flower_shop', 'images/flower_shop.png');
     this.load.image('flowershop_bg', 'images/flowershop_bg.png');
+    this.load.image('field_bg', 'images/field_bg.png');
   }
 
   async create() {
@@ -452,7 +453,7 @@ const config = {
   width: 480,
   height: 800,
   transparent: true,
-  scene: [GameScene, UIScene, ShopScene, FlowerShopScene],
+  scene: [GameScene, UIScene, ShopScene, FlowerShopScene, FieldScene],
   parent: document.body,
   scale: {
     mode: Phaser.Scale.FIT,

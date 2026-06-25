@@ -51,8 +51,18 @@ createHUD() {
     gameScene.scene.pause('GameScene');
     gameScene.scene.launch('FlowerShopScene');
   });
- }
+  // 채집 버튼
+  const fieldBtn = this.add.text(370, 25, '🌿', {
+    fontSize: '22px', fontFamily: 'Arial'
+  }).setOrigin(0.5, 0.5).setInteractive();
+
+   fieldBtn.on('pointerdown', () => {
+  gameScene.scene.pause('GameScene');
+  gameScene.scene.launch('FieldScene');
+   });
+
   }
+   }
 
  createActionButton() {
     this.actionBtn = this.add.text(240, 750, '', {
