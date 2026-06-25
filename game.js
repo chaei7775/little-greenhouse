@@ -68,6 +68,10 @@ if (!this.saveData.nickname) {
   
 }
   }
+
+  createMap() {
+    this.add.image(240, 425, 'bg').setDisplaySize(480, 800);
+  }
 showFlowerShopOpening() {
     const overlay = document.getElementById('popup-overlay');
     const title = document.getElementById('popup-title');
@@ -87,7 +91,6 @@ showFlowerShopOpening() {
 
     btn.onclick = () => {
       overlay.classList.remove('show');
-      this.scene.get('UIScene').refreshHUD();
       input.style.display = 'block';
       emoji.style.display = 'block';
       img.style.display = 'none';
@@ -154,7 +157,7 @@ showFlowerShopOpening() {
       this.scene.launch('ShopScene');
     });
   }
-showNicknamePopup() {
+    showNicknamePopup() {
     const overlay = document.getElementById('popup-overlay');
     const btn = document.getElementById('popup-btn');
     const input = document.getElementById('popup-input');
@@ -167,11 +170,13 @@ showNicknamePopup() {
       this.saveData.nickname = nickname;
       SaveSystem.save(this.saveData);
       overlay.classList.remove('show');
+      this.scene.get('UIScene').refreshHUD();
     };
   }
- updatePotDisplay() {
-    this.pots.forEach((pot, i) => {
+    updatePotDisplay() {
+      this.pots.forEach((pot, i) => {
       const potData = this.saveData.pots[i];
+      
       
       // 기존 꽃 이미지 제거
       if (pot.flowerImage) {
