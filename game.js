@@ -350,7 +350,15 @@ showNicknamePopup() {
         loadingText.destroy();
 
         if (!result) {
-          this.showMessage('❌ 이 조합은 교배가 안 돼요!');
+  const hasRecipe = FlowerData.recipes.find(r =>
+    (r.a === flowerA && r.b === flowerB) ||
+    (r.a === flowerB && r.b === flowerA)
+  );
+  if (hasRecipe) {
+    this.showMessage('💨 교배가 실패했어요...');
+  } else {
+    this.showMessage('❌ 이 조합은 교배가 안 돼요!');
+  }
           return;
         }
 
