@@ -42,6 +42,10 @@ class FieldScene extends Phaser.Scene {
 
     this.cursors = this.input.keyboard.createCursorKeys();
 
+    if (!this.scene.isActive('UIScene')) {
+    this.scene.launch('UIScene');
+}
+
     // 7초마다 씨앗 1개 생성
     this.time.addEvent({
       delay: 7000,
@@ -106,6 +110,27 @@ class FieldScene extends Phaser.Scene {
     seed.flowerId = flowerId;
     this.seeds.push(seed);
   }
+  showFieldRareDiscovery(flowerId) {
+    const flower = FlowerData.getFlower(flowerId);
+    if (!flower) return;
+
+    const panel = this.add.container(240, 400);
+    const bg = this.add.rectangle(0, 0, 350, 280, 0x1a1a2e, 0.97).setOrigin(0.5, 0.5);
+    const star = this.add.text(0, -90, '✨', { fontSize: '40px' }).setOrigin(0.5, 0.5);
+    const emoji = this.add.text(0, -30, flower.emoji, { fontSize: '50px' }).setOrigin(0.5, 0.5);
+    const name = this.add.text(0, 40, `${flower.name} 씨앗 발견!`, {
+      fontSize: '20px', color: '#ffd700', fontFamily: 'Arial'
+    }).setOrigin(0.5, 0.5);
+    const closeBtn = this.add.text(0, 110, '[ 확인 ]', {
+      fontSize: '18px', color: '#7fff7f', fontFamily: 'Arial',
+      backgroundColor: '#2d5a27', padding: { x: 20, y: 10 }
+    }).setOrigin(0.5, 0.5).setInteractive();
+
+    closeBtn.on('pointerdown', () => panel.destroy());
+    panel.add([bg, star, emoji, name, closeBtn]);
+  }
+
+
   showMessage(text) {
     const msg = this.add.text(240, 700, text, {
       fontSize: '14px', color: '#ffffff',
@@ -146,8 +171,7 @@ class FieldScene extends Phaser.Scene {
           SaveSystem.save(this.saveData);
           if (flower.rarity === 'rare') {
             this.showMessage(`🌟 희귀 씨앗 발견!`);
-            const uiScene = this.scene.get('UIScene');
-            if (uiScene && uiScene.showRareDiscovery) uiScene.showRareDiscovery(seed.flowerId);
+            this.showFieldRareDiscovery(seed.flowerId);
           } else if (flower.rarity === 'uncommon') {
             this.showMessage(`✨ 특별한 씨앗 발견! ${flower.name}`);
           } else {
