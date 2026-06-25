@@ -232,6 +232,8 @@ showNicknamePopup() {
       // 수확
       SaveSystem.addToInventory(this.saveData, potData.flower);
       SaveSystem.addToInventory(this.saveData, potData.flower);
+      SaveSystem.addToInventory(this.saveData, potData.flower);
+      SaveSystem.addToInventory(this.saveData, potData.flower);
       
       // 경험치 추가
       const harvestedFlower = FlowerData.getFlower(potData.flower);
