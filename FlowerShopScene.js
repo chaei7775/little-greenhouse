@@ -255,6 +255,7 @@ bagBtn.on('pointerdown', () => {
       const bouquet = FlowerData.bouquets.find(b => b.id === slot.id);
 
       // 구매!
+      this.sound.play('coin');
       this.saveData.money += slot.price;
       this.saveData.displaySlots[i] = null;
       SaveSystem.save(this.saveData);

@@ -30,6 +30,13 @@ class GameScene extends Phaser.Scene {
     this.load.image('flower_shop', 'images/flower_shop.png');
     this.load.image('flowershop_bg', 'images/flowershop_bg.png');
     this.load.image('field_bg', 'images/field_bg.png');
+
+    this.load.audio('plant', 'sounds/plant.mp3');
+    this.load.audio('water', 'sounds/water.wav');
+    this.load.audio('harvest', 'sounds/harvest.wav');
+    this.load.audio('breed', 'sounds/breed.wav');
+    this.load.audio('coin', 'sounds/coin.wav');
+    this.load.audio('levelup', 'sounds/levelup.wav');
   }
 
   async create() {
@@ -225,6 +232,7 @@ showNicknamePopup() {
         this.saveData.inventory[seedId]--;
         SaveSystem.save(this.saveData);
         this.updatePotDisplay();
+        this.sound.play('plant');
         this.showMessage('🌱 씨앗을 심었어요!');
       });
 
@@ -270,8 +278,10 @@ showNicknamePopup() {
       if (isNew && flower.rarity === 'rare') {
         this.scene.get('UIScene').showRareDiscovery(potData.flower);
       } else if (newLevel > (this.saveData.level || 1)) {
+        this.sound.play('levelup');
         this.showMessage(`🎉 레벨 ${newLevel} 달성! +${expGain}exp`);
       } else {
+        this.sound.play('harvest');
         this.showMessage(`${flower.emoji} ${flower.name} 수확! +${expGain}exp`);
       }
 
@@ -299,6 +309,7 @@ showNicknamePopup() {
     }
 
     SaveSystem.save(this.saveData);
+    this.sound.play('water');
     this.showMessage(`${water.emoji} ${water.name} 줬어요!`);
   });
 }
@@ -350,6 +361,7 @@ showNicknamePopup() {
         if (isNew && flower.rarity === 'rare') {
           this.uiScene.showRareDiscovery(result);
         } else {
+          this.sound.play('breed');
           this.showMessage(`✨ 교배 성공! ${flower.emoji} ${flower.name} 씨앗 획득!`);
         }
 
