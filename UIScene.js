@@ -41,6 +41,17 @@ createHUD() {
       const inventory = gameScene.saveData.inventory;
       this.showInventory(inventory);
     });
+    // 꽃집 버튼 (도감 완성 후에만 보임)
+       if (gameScene.saveData?.shopUnlocked) {
+     const shopBtn = this.add.text(400, 25, '🌸', {
+       fontSize: '22px', fontFamily: 'Arial'
+   }).setOrigin(0.5, 0.5).setInteractive();
+
+  shopBtn.on('pointerdown', () => {
+    gameScene.scene.pause('GameScene');
+    gameScene.scene.launch('FlowerShopScene');
+  });
+ }
   }
 
  createActionButton() {
@@ -180,9 +191,9 @@ showRareDiscovery(flowerId) {
       const y = Math.floor(i / 4) * 90 - 80;
 
      const item = this.add.image(x, y, id).setDisplaySize(50, 50).setInteractive();
-const name = this.add.text(x, y + 35, flower.name, {
-  fontSize: '9px', color: '#ffffff', fontFamily: 'Arial'
-}).setOrigin(0.5, 0.5);
+     const name = this.add.text(x, y + 35, flower.name, {
+       fontSize: '9px', color: '#ffffff', fontFamily: 'Arial'
+      }).setOrigin(0.5, 0.5);
 
 
       const count = this.add.text(x + 20, y + 20, `x${inventory[id]}`, {
