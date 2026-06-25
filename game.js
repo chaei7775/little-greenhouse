@@ -30,7 +30,9 @@ class GameScene extends Phaser.Scene {
     this.load.image('flower_shop', 'images/flower_shop.png');
     this.load.image('flowershop_bg', 'images/flowershop_bg.png');
     this.load.image('field_bg', 'images/field_bg.png');
-
+    this.load.image('seed', 'images/seed.png');
+    
+//소리
     this.load.audio('plant', 'sounds/plant.mp3');
     this.load.audio('water', 'sounds/water.wav');
     this.load.audio('harvest', 'sounds/harvest.wav');

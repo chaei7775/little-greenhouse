@@ -75,10 +75,7 @@ class FieldScene extends Phaser.Scene {
       }
 
       const flower = FlowerData.getFlower(flowerId);
-      const seed = this.add.text(x, y, '🌱', {
-        fontSize: '24px', fontFamily: 'Arial'
-      }).setOrigin(0.5, 0.5).setDepth(5);
-
+      const seed = this.add.image(x, y, 'seed').setDisplaySize(40, 40).setDepth(5);
       seed.flowerId = flowerId;
       this.seeds.push(seed);
     }
@@ -103,9 +100,7 @@ class FieldScene extends Phaser.Scene {
     }
 
     const flower = FlowerData.getFlower(flowerId);
-    const seed = this.add.text(x, y, '🌱', {
-      fontSize: '24px', fontFamily: 'Arial'
-    }).setOrigin(0.5, 0.5).setDepth(5);
+    const seed = this.add.image(x, y, 'seed').setDisplaySize(40, 40).setDepth(5);
 
     seed.flowerId = flowerId;
     this.seeds.push(seed);
