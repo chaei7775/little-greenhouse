@@ -63,6 +63,14 @@ createHUD() {
   }
    }
 
+   refreshHUD() {
+    this.children.each(child => {
+      if (child.y < 50) child.destroy();
+    });
+    this.createHUD();
+    this.createActionButton();
+  }
+
  createActionButton() {
     this.actionBtn = this.add.text(240, 750, '', {
       fontSize: '16px',

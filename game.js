@@ -87,16 +87,13 @@ showFlowerShopOpening() {
 
     btn.onclick = () => {
       overlay.classList.remove('show');
+      this.scene.get('UIScene').refreshHUD();
       input.style.display = 'block';
       emoji.style.display = 'block';
       img.style.display = 'none';
+      this.scene.get('UIScene').refreshHUD();
     };
   }
- createMap() {
-    // 배경 이미지
-    this.add.image(240, 425, 'bg').setDisplaySize(480, 800);
-  }
-
  createPlayer() {
     this.player = this.add.image(240, 600, 'player').setDisplaySize(100, 140);
     this.player.setDepth(10);
